@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hankkin.pagelayout.BlinkLayout
+    android:id="@+id/blinklayout"
+    android:gravity="center"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:textSize="18sp"
+        android:textColor="@color/blink_color"
+        android:text="正在加载中..."
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="今日头条"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="@color/blink_color"
+        android:id="@+id/tv_page_loading"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</com.hankkin.pagelayout.BlinkLayout>
