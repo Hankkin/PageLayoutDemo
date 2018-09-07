@@ -15,20 +15,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        PageLayout.Builder(this)
-                .initPage(this)
-                .setEmpty(R.layout.layout_empty)
-                .setError(R.layout.layout_error)
-                .setLoading(R.layout.layout_loading)
-                .setOnRetryListener(object : PageLayout.OnRetryClickListener{
-                    override fun onRetry() {
-                        loadData()
-                    }
-                })
-                .create()
-
          page = PageLayout.Builder(this)
                 .initPage(ll)
+                 .setEmpty(R.layout.layout_empty)
+                 .setError(R.layout.layout_error)
+                 .setLoading(R.layout.layout_loading_demo)
                 .setOnRetryListener(object : PageLayout.OnRetryClickListener{
                     override fun onRetry() {
                         loadData()

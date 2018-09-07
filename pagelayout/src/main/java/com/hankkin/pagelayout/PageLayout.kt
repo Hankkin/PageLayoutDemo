@@ -120,7 +120,7 @@ class PageLayout : FrameLayout {
         private lateinit var mTvError: TextView
         private lateinit var mTvLoading: TextView
         private lateinit var mBlinkLayout: BlinkLayout
-        private lateinit var mOnRetryClickListener: OnRetryClickListener
+        private var mOnRetryClickListener: OnRetryClickListener? = null
 
 
         constructor(context: Context) {
@@ -130,17 +130,17 @@ class PageLayout : FrameLayout {
             initViews()
         }
 
-        private fun initViews(){
-            mPageLayout.mEmpty = mInflater.inflate(R.layout.layout_empty,mPageLayout,false)
+        private fun initViews() {
+            mPageLayout.mEmpty = mInflater.inflate(R.layout.layout_empty, mPageLayout, false)
                     .apply {
                         mTvEmpty = findViewById<TextView>(R.id.tv_page_empty)!!
                     }
-            mPageLayout.mError = mInflater.inflate(R.layout.layout_error,mPageLayout,false)
+            mPageLayout.mError = mInflater.inflate(R.layout.layout_error, mPageLayout, false)
                     .apply {
                         mTvError = findViewById(R.id.tv_page_error)
-                        mTvError.setOnClickListener { mOnRetryClickListener.onRetry() }
+                        mTvError.setOnClickListener { mOnRetryClickListener?.onRetry() }
                     }
-            mPageLayout.mLoading = mInflater.inflate(R.layout.layout_loading,mPageLayout,false)
+            mPageLayout.mLoading = mInflater.inflate(R.layout.layout_loading, mPageLayout, false)
                     .apply {
                         mBlinkLayout = findViewById(R.id.blinklayout)
                         mPageLayout.mBlinkLayout = mBlinkLayout
@@ -153,9 +153,28 @@ class PageLayout : FrameLayout {
             return this
         }
 
-        fun setError(error: Int): Builder {
-            mPageLayout.mError = mInflater.inflate(error, mPageLayout, false)
+        fun setError(errorView: View, errorClickTv: TextView): Builder {
+            mPageLayout.mError = errorView
+            mTvError = errorClickTv
+            errorClick(mTvError)
             return this
+        }
+
+        fun setError(errorView: View, errorClickId: Int): Builder {
+            mPageLayout.mError = errorView
+            mTvError = errorView.findViewById(errorClickId)
+            errorClick(mTvError)
+            return this
+        }
+
+        private fun errorClick(errorClickView: View) {
+            if (mOnRetryClickListener != null) {
+                errorClickView.setOnClickListener {
+                    mOnRetryClickListener?.onRetry()
+                }
+            } else {
+                throw NullPointerException("Please setOnRetryClickListener")
+            }
         }
 
         fun setEmpty(empty: Int): Builder {
@@ -163,31 +182,31 @@ class PageLayout : FrameLayout {
             return this
         }
 
-        fun setLoadingText(text: String){
+        fun setLoadingText(text: String) {
             mTvLoading.text = text
         }
 
-        fun setLoadingTextColor(color: Int){
+        fun setLoadingTextColor(color: Int) {
             mTvLoading.setTextColor(mContext.resources.getColor(color))
         }
 
-        fun setLoadingBlinkColor(color: Int){
+        fun setLoadingBlinkColor(color: Int) {
             mBlinkLayout.setShimmerColor(mContext.resources.getColor(color))
         }
 
-        fun setEmptyText(text: String){
+        fun setEmptyText(text: String) {
             mTvEmpty.text = text
         }
 
-        fun setEmptyTextColor(color: Int){
+        fun setEmptyTextColor(color: Int) {
             mTvEmpty.setTextColor(mContext.resources.getColor(color))
         }
 
-        fun setErrorText(text: String){
+        fun setErrorText(text: String) {
             mTvError.text = text
         }
 
-        fun setErrorTextColor(color: Int){
+        fun setErrorTextColor(color: Int) {
             mTvError.setTextColor(mContext.resources.getColor(color))
         }
 
