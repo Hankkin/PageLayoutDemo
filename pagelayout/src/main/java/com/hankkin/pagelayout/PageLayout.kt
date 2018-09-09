@@ -166,8 +166,9 @@ class PageLayout : FrameLayout {
         }
 
 
-        fun setEmpty(empty: Int): Builder {
+        fun setEmpty(empty: Int,emptyTvId: Int): Builder {
             mInflater.inflate(empty, null, false).apply {
+                mTvEmpty = findViewById(emptyTvId)
                 mPageLayout.mEmpty = this
                 mPageLayout.addView(this)
             }
