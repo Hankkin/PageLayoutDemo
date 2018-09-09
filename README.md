@@ -46,7 +46,7 @@ PageLayout.Builder(this)
 PageLayout.Builder(this)
                 .initPage(ll_demo)
                 .setLoading(R.layout.layout_loading_demo)
-                .setEmpty(R.layout.layout_empty_demo)
+                .setEmpty(R.layout.layout_empty_demo,R.id.tv_page_empty_demo)
                 .setError(R.layout.layout_error_demo,R.id.tv_page_error_demo,object : PageLayout.OnRetryClickListener{
                     override fun onRetry() {
                         loadData()
