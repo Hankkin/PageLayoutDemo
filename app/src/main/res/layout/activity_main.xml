@@ -1,96 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:gravity="center"
+    android:orientation="vertical">
 
+    <Button
+        android:id="@+id/btn_default"
+        android:text="默认加载样式"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:text="loading"
-            android:id="@+id/loading"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            />
-        <Button
-            android:text="empty"
-            android:id="@+id/empty"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            />
-
-        <Button
-            android:text="error"
-            android:id="@+id/error"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            />
-
-        <Button
-            android:text="content"
-            android:id="@+id/content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            />
-        <Button
-            android:text="loading-demo"
-            android:id="@+id/loading_demo"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:padding="20dp"
-        android:orientation="vertical"
-        android:id="@+id/ll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:background="@drawable/bg_theme_circle"
-            android:layout_width="match_parent"
-            android:layout_height="150dp" />
-        <TextView
-            android:text="测试数据"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="测试数据"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="测试数据"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="测试数据"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="测试数据"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_demo"
+        android:text="自定义加载样式"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

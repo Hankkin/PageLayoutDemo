@@ -1,65 +1,23 @@
 package com.hankkin.pagelayoutdemo
 
+import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import com.hankkin.pagelayout.PageLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var page: PageLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-         page = PageLayout.Builder(this)
-                .initPage(ll)
-                 .setEmpty(R.layout.layout_empty)
-                 .setError(R.layout.layout_error)
-                 .setLoading(R.layout.layout_loading_demo)
-                .setOnRetryListener(object : PageLayout.OnRetryClickListener{
-                    override fun onRetry() {
-                        loadData()
-                    }
-                })
-                .create()
-
-        loadData()
-        loading.setOnClickListener {
-            page.showLoading()
+        btn_default.setOnClickListener {
+            startActivity(Intent(this,DefaultActivity::class.java))
         }
 
-        empty.setOnClickListener {
-            page.showEmpty()
+        btn_demo.setOnClickListener {
+            startActivity(Intent(this,DemoActivity::class.java))
         }
-
-        error.setOnClickListener { page.showError() }
-
-        content.setOnClickListener { page.showContent() }
-
-        loading_demo.setOnClickListener {
-            page = PageLayout.Builder(this)
-                    .initPage(ll)
-                    .setLoading(R.layout.layout_loading_demo)
-                    .setOnRetryListener(object : PageLayout.OnRetryClickListener{
-                        override fun onRetry() {
-                            loadData()
-                        }
-                    })
-                    .create()
-            loadData()
-        }
-
-
     }
 
-    private fun loadData(){
-        page.showLoading()
-
-        Handler().postDelayed( { page.showContent() },3000)
-
-    }
 }

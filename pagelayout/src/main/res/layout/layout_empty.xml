@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:textColor="@android:color/holo_blue_light"
+        android:textColor="@android:color/black"
         android:text="@string/page_empty"
         android:textSize="20sp"
         android:id="@+id/tv_page_empty"
