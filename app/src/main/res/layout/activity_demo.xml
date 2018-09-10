@@ -41,7 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
-            android:background="@drawable/bg_theme_circle"
+            android:scaleType="fitXY"
+            android:src="@drawable/pic"
             android:layout_width="match_parent"
             android:layout_height="150dp" />
         <TextView
