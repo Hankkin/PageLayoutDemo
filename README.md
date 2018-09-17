@@ -34,6 +34,22 @@ Android中经常使用一个空白页和网络错误页用来提高用户体验�
 
 首先我们定义PageLayout继承FrameLayout或者LinearLayou或者其他的布局都可以，然后我们需要提供切换四个布局的功能，当然如果支持自定义就更好了，还有状态布局里面的一些属性，还方便一键配置，所以最后采用了Builder模式来创建，使用方式就和Android里面的**AlertDialog**一样，通过Builder去构建一个PageLayout。最后的样子是长这样的：
 
+| 方法                       | 注释                          |
+| :------------------------- | ----------------------------- |
+| showLoading()              | 显示loading                   |
+| showError()                | 显示错误布局                  |
+| showEmpty()                | 显示空布局                    |
+| hide()                     | 显示内容布局                  |
+| **Builder**                |                               |
+| setLoading()               | setLoadingText()              |
+| setError()                 | setDefaultLoadingBlinkText()  |
+| setEmpty()                 | setLoadingTextColor()         |
+| setDefaultEmptyText()      | setDefaultLoadingBlinkColor() |
+| setDefaultEmptyTextColor() | setDefaultErrorText()         |
+| setDefaultErrorTextColor() | setEmptyDrawable()            |
+| setErrorDrawable()         |                               |
+
+
 
 **默认样式**
 ```

@@ -134,21 +134,28 @@ class PageLayout : FrameLayout {
                     .apply {
                         mBlinkLayout = findViewById(R.id.blinklayout)
                         mPageLayout.mBlinkLayout = mBlinkLayout
-                        mTvLoading = findViewById(R.id.tv_page_loading)
                         mTvLoadingBlink = findViewById(R.id.tv_page_loading_blink)
                     }
             mPageLayout.mLoading?.visibility = View.GONE
             mPageLayout.addView(mPageLayout.mLoading)
         }
 
-        fun setLoading(loading: Int): Builder {
+        /**
+         * 设置loading布局
+         */
+        fun setLoading(loading: Int,loadingTvId: Int): Builder {
             mInflater.inflate(loading, mPageLayout, false).apply {
+                mTvLoading = findViewById(loadingTvId)
                 mPageLayout.mLoading = this
                 mPageLayout.addView(this)
             }
             return this
         }
 
+        /**
+         * 自定义错误布局
+         * 默认样式，传入错误文案ID，及点击回调
+         */
         fun setError(errorView: Int, errorClickId: Int, onRetryClickListener: OnRetryClickListener): Builder {
             mInflater.inflate(errorView, mPageLayout, false).apply {
                 mPageLayout.mError = this
@@ -159,6 +166,10 @@ class PageLayout : FrameLayout {
             return this
         }
 
+        /**
+         * 自定义错误布局
+         * 设置前需手动初始化好View中各个事件
+         */
         fun setError(errorView: View): Builder {
             mPageLayout.mError = errorView
             mPageLayout.addView(errorView)
@@ -166,6 +177,9 @@ class PageLayout : FrameLayout {
         }
 
 
+        /**
+         * 自定义空布局
+         */
         fun setEmpty(empty: Int,emptyTvId: Int): Builder {
             mInflater.inflate(empty, null, false).apply {
                 mTvEmpty = findViewById(emptyTvId)
@@ -175,54 +189,91 @@ class PageLayout : FrameLayout {
             return this
         }
 
-        fun setDefaultLoadingText(text: String): Builder {
+        /**
+         * 设置加载文案
+         */
+        fun setLoadingText(text: String): Builder {
             mTvLoading.text = text
             return this
         }
 
+        /**
+         * 设置默认闪烁加载文案
+         */
         fun setDefaultLoadingBlinkText(text: String): Builder {
             mTvLoadingBlink.text = text
             return this
         }
 
-        fun setDefaultLoadingTextColor(color: Int): Builder {
+        /**
+         * 设置加载文字颜色
+         */
+        fun setLoadingTextColor(color: Int): Builder {
             mTvLoading.setTextColor(mContext.resources.getColor(color))
             return this
         }
 
+        /**
+         * 设置默认加载闪烁颜色
+         */
         fun setDefaultLoadingBlinkColor(color: Int): Builder {
             mBlinkLayout.setShimmerColor(mContext.resources.getColor(color))
             return this
         }
 
+        /**
+         * 设置默认空布局文案
+         */
         fun setDefaultEmptyText(text: String): Builder {
             mTvEmpty.text = text
             return this
         }
 
+        /**
+         * 设置默认空布局文案颜色
+         */
         fun setDefaultEmptyTextColor(color: Int): Builder {
             mTvEmpty.setTextColor(mContext.resources.getColor(color))
             return this
         }
 
-        fun setDefaultErrorText(text: String) {
+        /**
+         * 设置默认错误布局文案
+         */
+        fun setDefaultErrorText(text: String): Builder {
             mTvError.text = text
+            return this
         }
 
-        fun setDefaultErrorTextColor(color: Int) {
+
+        /**
+         * 设置默认错误布局文案颜色
+         */
+        fun setDefaultErrorTextColor(color: Int): Builder {
             mTvError.setTextColor(mContext.resources.getColor(color))
+            return this
         }
 
+        /**
+         * 设置空布局提醒图片
+         */
         fun setEmptyDrawable(resId: Int): Builder{
             setTopDrawables(mTvEmpty,resId)
             return this
         }
 
+        /**
+         * 设置错误布局提醒图片
+         */
         fun setErrorDrawable(resId: Int): Builder{
             setTopDrawables(mTvError,resId)
             return this
         }
 
+
+        /**
+         * 设置布局top drawable
+         */
         private fun setTopDrawables(textView: TextView, resId: Int) {
             if (resId == 0){
                 textView.setCompoundDrawables(null, null, null, null)
@@ -293,5 +344,9 @@ class PageLayout : FrameLayout {
 
     interface OnRetryClickListener {
         fun onRetry()
+    }
+
+    abstract class CustomView{
+        abstract fun setView(pageLayout: PageLayout)
     }
 }

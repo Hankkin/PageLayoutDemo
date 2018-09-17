@@ -12,7 +12,7 @@ class DemoActivity : AppCompatActivity() {
     private val mPageLayout by lazy {
         PageLayout.Builder(this)
                 .initPage(ll_demo)
-                .setLoading(R.layout.layout_loading_demo)
+                .setLoading(R.layout.layout_loading_demo,R.id.tv_page_loading_demo)
                 .setEmpty(R.layout.layout_empty_demo,R.id.tv_page_empty_demo)
                 .setError(R.layout.layout_error_demo,R.id.tv_page_error_demo,object : PageLayout.OnRetryClickListener{
                     override fun onRetry() {
@@ -21,7 +21,9 @@ class DemoActivity : AppCompatActivity() {
                 })
                 .setEmptyDrawable(R.drawable.pic_empty)
                 .setErrorDrawable(R.drawable.pic_error)
+                .setLoadingText("Loading")
                 .create()
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -22,6 +22,8 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import org.jetbrains.annotations.NotNull;
+
 public class BlinkLayout extends LinearLayout {
 
     private Paint maskPaint;
