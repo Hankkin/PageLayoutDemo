@@ -7,7 +7,6 @@
 
     <TextView
         android:text="自定义空布局"
-        android:textSize="20sp"
         android:id="@+id/tv_page_empty_demo"
         android:layout_gravity="center"
         android:layout_width="wrap_content"

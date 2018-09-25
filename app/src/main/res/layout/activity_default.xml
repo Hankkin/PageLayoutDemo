@@ -8,36 +8,6 @@
     tools:context=".DefaultActivity">
 
     <LinearLayout
-        android:gravity="center"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/loading"
-            android:text="加载"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/empty"
-            android:text="空布局"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/error"
-            android:text="错误布局"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/content"
-            android:text="内容布局"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-    <LinearLayout
         android:layout_weight="1"
         android:padding="20dp"
         android:orientation="vertical"

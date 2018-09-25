@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.TextView
 
 /**
@@ -21,12 +20,14 @@ class PageLayout : FrameLayout {
         EMPTY_TYPE,
         LOADING_TYPE,
         ERROR_TYPE,
-        CONTENT_TYPE
+        CONTENT_TYPE,
+        CUSTOM_TYPE
     }
     private var mLoading: View? = null
     private var mEmpty: View? = null
     private var mError: View? = null
     private var mContent: View? = null
+    private var mCustom: View? = null
     private var mContext: Context? = null
     private var mBlinkLayout: BlinkLayout? = null
     private var mCurrentState = State.CONTENT_TYPE
@@ -52,6 +53,7 @@ class PageLayout : FrameLayout {
         mContent?.visibility = if (type == State.CONTENT_TYPE) View.VISIBLE else View.GONE
         mError?.visibility = if (type == State.ERROR_TYPE) View.VISIBLE else View.GONE
         mEmpty?.visibility = if (type == State.EMPTY_TYPE) View.VISIBLE else View.GONE
+        mCustom?.visibility = if (type == State.CUSTOM_TYPE) View.VISIBLE else View.GONE
     }
 
 
@@ -79,6 +81,10 @@ class PageLayout : FrameLayout {
         }
     }
 
+    fun showCustom(){
+        showView(State.CUSTOM_TYPE)
+    }
+
 
     class Builder {
         private var mPageLayout: PageLayout
@@ -86,6 +92,7 @@ class PageLayout : FrameLayout {
         private var mContext: Context
         private lateinit var mTvEmpty: TextView
         private lateinit var mTvError: TextView
+        private lateinit var mTvErrorRetry: TextView
         private lateinit var mTvLoading: TextView
         private lateinit var mTvLoadingBlink: TextView
         private lateinit var mBlinkLayout: BlinkLayout
@@ -123,7 +130,8 @@ class PageLayout : FrameLayout {
             mPageLayout.mError = mInflater.inflate(R.layout.layout_error, mPageLayout, false)
                     .apply {
                         mTvError = findViewById(R.id.tv_page_error)
-                        mTvError.setOnClickListener { mOnRetryClickListener?.onRetry() }
+                        mTvErrorRetry = findViewById(R.id.tv_page_error_retry)
+                        mTvErrorRetry.setOnClickListener { mOnRetryClickListener?.onRetry() }
                     }
             mPageLayout.mError?.visibility = View.GONE
             mPageLayout.addView(mPageLayout.mError)
@@ -171,8 +179,10 @@ class PageLayout : FrameLayout {
          * 设置前需手动初始化好View中各个事件
          */
         fun setError(errorView: View): Builder {
-            mPageLayout.mError = errorView
-            mPageLayout.addView(errorView)
+            mPageLayout.apply {
+                mError = errorView
+                addView(errorView)
+            }
             return this
         }
 
@@ -185,6 +195,17 @@ class PageLayout : FrameLayout {
                 mTvEmpty = findViewById(emptyTvId)
                 mPageLayout.mEmpty = this
                 mPageLayout.addView(this)
+            }
+            return this
+        }
+
+        /**
+         * 自定义布局
+         */
+        fun setCustomView(view: View): Builder{
+            mPageLayout.apply {
+                mCustom = view
+                addView(view)
             }
             return this
         }
@@ -251,6 +272,22 @@ class PageLayout : FrameLayout {
          */
         fun setDefaultErrorTextColor(color: Int): Builder {
             mTvError.setTextColor(mContext.resources.getColor(color))
+            return this
+        }
+
+        /**
+         * 设置默认错误布局重试文案
+         */
+        fun setDefaultErrorRetryText(text: String): Builder {
+            mTvErrorRetry.text = text
+            return this
+        }
+
+        /**
+         * 设置默认错误布局重试文案颜色
+         */
+        fun setDefaultErrorRetryTextColor(color: Int): Builder {
+            mTvErrorRetry.setTextColor(mContext.resources.getColor(color))
             return this
         }
 
@@ -346,7 +383,4 @@ class PageLayout : FrameLayout {
         fun onRetry()
     }
 
-    abstract class CustomView{
-        abstract fun setView(pageLayout: PageLayout)
-    }
 }
