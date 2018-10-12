@@ -1,1 +1,1 @@
-include ':app', ':pagelayout'
+include ':app', ':pagelayout', ':pagelayout-java'
