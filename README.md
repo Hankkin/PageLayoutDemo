@@ -3,6 +3,7 @@
 
 > **该功能是支持单独为某个布局设置状态改变的，比如很多同学提到的我一个listview的数据没有获取到，fun initPage(targetView: Any),这个targetView你只需要设置成你的listview或者包裹你listview的parent布局就OK了，具体原理可以看下面的代码解析啊，遍历获取索引，然后记录索引值....**
 
+**如果您想看JAVA版本，点击[https://github.com/Hankkin/PageLayoutDemojava](https://github.com/Hankkin/PageLayoutDemojava)**
 
 > 项目中我们经常会用到的加载数据，加载完数据后显示内容，如果没有数据显示一个空白页，这是如果网络错误了显示一个网络错误页，自定义一个PageLayout。
 
