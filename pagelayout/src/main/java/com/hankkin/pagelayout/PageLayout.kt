@@ -32,6 +32,17 @@ class PageLayout : FrameLayout {
     private var mBlinkLayout: BlinkLayout? = null
     private var mCurrentState = State.CONTENT_TYPE
 
+    private var mOnRetryClickListener: OnRetryClickListener? = null
+
+
+    fun getOnRetryListener(): OnRetryClickListener?{
+        return mOnRetryClickListener
+    }
+
+    fun setOnRetryListener(onRetryClickListener: OnRetryClickListener) {
+        this.mOnRetryClickListener = onRetryClickListener
+    }
+
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -96,7 +107,6 @@ class PageLayout : FrameLayout {
         private lateinit var mTvLoading: TextView
         private lateinit var mTvLoadingBlink: TextView
         private lateinit var mBlinkLayout: BlinkLayout
-        private var mOnRetryClickListener: OnRetryClickListener? = null
 
 
         constructor(context: Context) {
@@ -131,7 +141,7 @@ class PageLayout : FrameLayout {
                     .apply {
                         mTvError = findViewById(R.id.tv_page_error)
                         mTvErrorRetry = findViewById(R.id.tv_page_error_retry)
-                        mTvErrorRetry.setOnClickListener { mOnRetryClickListener?.onRetry() }
+                        mTvErrorRetry.setOnClickListener { mPageLayout.getOnRetryListener()?.onRetry() }
                     }
             mPageLayout.mError?.visibility = View.GONE
             mPageLayout.addView(mPageLayout.mError)
@@ -367,11 +377,6 @@ class PageLayout : FrameLayout {
             content?.addView(mPageLayout, index, lp)
             mPageLayout.addView(oldContent)
             initDefault()   //设置默认状态布局
-            return this
-        }
-
-        fun setOnRetryListener(onRetryClickListener: OnRetryClickListener): Builder {
-            this.mOnRetryClickListener = onRetryClickListener
             return this
         }
 
