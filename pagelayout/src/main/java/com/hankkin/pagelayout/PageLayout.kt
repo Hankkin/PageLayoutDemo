@@ -32,16 +32,7 @@ class PageLayout : FrameLayout {
     private var mBlinkLayout: BlinkLayout? = null
     private var mCurrentState = State.CONTENT_TYPE
 
-    private var mOnRetryClickListener: OnRetryClickListener? = null
 
-
-    fun getOnRetryListener(): OnRetryClickListener?{
-        return mOnRetryClickListener
-    }
-
-    fun setOnRetryListener(onRetryClickListener: OnRetryClickListener) {
-        this.mOnRetryClickListener = onRetryClickListener
-    }
 
 
     constructor(context: Context) : super(context)
@@ -107,6 +98,7 @@ class PageLayout : FrameLayout {
         private lateinit var mTvLoading: TextView
         private lateinit var mTvLoadingBlink: TextView
         private lateinit var mBlinkLayout: BlinkLayout
+        private var mOnRetryClickListener: OnRetryClickListener? = null
 
 
         constructor(context: Context) {
@@ -141,7 +133,7 @@ class PageLayout : FrameLayout {
                     .apply {
                         mTvError = findViewById(R.id.tv_page_error)
                         mTvErrorRetry = findViewById(R.id.tv_page_error_retry)
-                        mTvErrorRetry.setOnClickListener { mPageLayout.getOnRetryListener()?.onRetry() }
+                        mTvErrorRetry.setOnClickListener { mOnRetryClickListener?.onRetry() }
                     }
             mPageLayout.mError?.visibility = View.GONE
             mPageLayout.addView(mPageLayout.mError)
@@ -345,6 +337,10 @@ class PageLayout : FrameLayout {
                     mContext = targetView.activity!!
                     content = (targetView.view)?.parent as ViewGroup
                 }
+                is android.app.Fragment -> {
+                    mContext = targetView.activity!!
+                    content = (targetView.view)?.parent as ViewGroup
+                }
                 is View -> {        //如果是View，也取到parent
                     mContext = targetView.context
                     try {
@@ -380,6 +376,11 @@ class PageLayout : FrameLayout {
             return this
         }
 
+
+        fun setOnRetryListener(onRetryListener: OnRetryClickListener): Builder {
+            this.mOnRetryClickListener = onRetryListener
+            return this
+        }
 
         fun create() = mPageLayout
     }

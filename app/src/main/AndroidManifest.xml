@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DefaultActivity" />
-        <activity android:name=".DemoActivity"></activity>
+        <activity android:name=".DemoActivity" />
+        <activity android:name=".FragmentActivity"></activity>
     </application>
 
 </manifest>
