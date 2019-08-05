@@ -18,6 +18,10 @@ class MainActivity : AppCompatActivity() {
         btn_demo.setOnClickListener {
             startActivity(Intent(this,DemoActivity::class.java))
         }
+
+        btn_fg.setOnClickListener {
+            startActivity(Intent(this,FragmentActivity::class.java))
+        }
     }
 
 }

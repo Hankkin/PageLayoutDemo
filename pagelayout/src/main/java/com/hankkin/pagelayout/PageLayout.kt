@@ -33,6 +33,8 @@ class PageLayout : FrameLayout {
     private var mCurrentState = State.CONTENT_TYPE
 
 
+
+
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
@@ -335,6 +337,10 @@ class PageLayout : FrameLayout {
                     mContext = targetView.activity!!
                     content = (targetView.view)?.parent as ViewGroup
                 }
+                is android.app.Fragment -> {
+                    mContext = targetView.activity!!
+                    content = (targetView.view)?.parent as ViewGroup
+                }
                 is View -> {        //如果是View，也取到parent
                     mContext = targetView.context
                     try {
@@ -370,11 +376,11 @@ class PageLayout : FrameLayout {
             return this
         }
 
-        fun setOnRetryListener(onRetryClickListener: OnRetryClickListener): Builder {
-            this.mOnRetryClickListener = onRetryClickListener
+
+        fun setOnRetryListener(onRetryListener: OnRetryClickListener): Builder {
+            this.mOnRetryClickListener = onRetryListener
             return this
         }
-
 
         fun create() = mPageLayout
     }
